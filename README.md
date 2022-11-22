@@ -8,9 +8,9 @@ My personal project goals is to be able to better understand interacting with da
 
 ### Import files from excel to pgadmin in order to clean and review data further with postgresql 
 
-###Analyze data and run objective sql queries to answer insight forming questions within data 
+### Analyze data and run objective sql queries to answer insight forming questions within data 
 
-###Identify patterns with data and identify areas of risk within data
+### Identify patterns with data and identify areas of risk within data
 
 ## Results
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
