@@ -4,11 +4,16 @@ Answer the following questions and provide the SQL queries used to find the answ
 **Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
 
 
-SQL Queries:
+SQL Queries: SELECT country, city, SUM(CAST('total_transaction_revenue'/1000000 as real)) as total_transaction_revenue
+FROM all_sessions
+WHERE total_transaction_revenue IS NOT NULL 
+AND city != 'not available in demo dataset'
+GROUP BY country, city 
+ORDER BY total_transaction_revenue DESC;
 
 
 
-Answer:
+Answer: San Francisco, USA has the highest level of transaction revenues at $1564.
 
 
 
@@ -16,11 +21,22 @@ Answer:
 **Question 2: What is the average number of products ordered from visitors in each city and country?**
 
 
-SQL Queries:
+SQL Queries: WITH newtable AS (
+SELECT country, CASE WHEN city = 'not available in demo dataset' THEN country
+																ELSE city 
+																END as 
+city, total_ordered
+	FROM all_sessions al 
+	JOIN sales_by_sku sbs 
+	ON al.product_sku = sbs.product_sku)
+SELECT country, city, CAST (AVG(total_ordered) as real)
+FROM newtable 
+GROUP BY country, city 
+ORDER BY avg DESC;
 
 
 
-Answer:
+Answer: The avg number of products ordered from the highest ordering countries, cities are Riyadh, Saudi Arabia and Brno, Czechia at 319. 
 
 
 
