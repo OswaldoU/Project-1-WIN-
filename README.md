@@ -16,7 +16,7 @@ My personal project goals are to be able to better understand interacting with d
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
 
 ## Challenges 
-(discuss challenges you faced in the project)
+One major challenge that was consistent throughout the entire project was that of technical difficulties. During the process of completing the project my computer and pgadmin consistently crashed to the point where I had to change computers and start all over from scratch. 
 
 ## Future Goals
-(what would you do if you had more time?)
+If I had more time, I would definitely take a more in depth look at the relationships between the different datatypes and datasets. 
