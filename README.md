@@ -1,7 +1,7 @@
 # Final-Project-Transforming-and-Analyzing-Data-with-SQL
 
 ## Project/Goals
-My personal project goals is to be able to better understand interacting with datasets using sql and to be more comfortable with large databases.
+My personal project goals are to be able to better understand interacting with datasets using sql and to be more comfortable with large databases.
 
 ## Process
 ### Review csv files to examine and identify patterns within excel 
