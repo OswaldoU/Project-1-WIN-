@@ -2,26 +2,41 @@ Answer the following questions and provide the SQL queries used to find the answ
 
     
 **Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
-
-
-SQL Queries: SELECT country, city, SUM(CAST('total_transaction_revenue'/1000000 as real)) as total_transaction_revenue
+```
+SELECT country, city, SUM(total_transaction_revenue) as total_city_revenue
 FROM all_sessions
-WHERE total_transaction_revenue IS NOT NULL 
-AND city != 'not available in demo dataset'
-GROUP BY country, city 
-ORDER BY total_transaction_revenue DESC;
+WHERE total_transaction_revenue IS NOT null 
+GROUP BY country, city
+ORDER BY total_city_revenue DESC;
+```
 
+-- As countries
+```
+SELECT country, SUM(total_transaction_revenue) as total_country_revenue
+FROM all_sessions
+WHERE total_transaction_revenue IS NOT null 
+GROUP BY country
+ORDER BY total_country_revenue DESC;
+```
 
+-- As cities
+```
+SELECT city, SUM(total_transaction_revenue) as total_city_revenue
+FROM all_sessions
+WHERE total_transaction_revenue IS NOT null AND city != 'not available in demo dataset'
+GROUP BY city
+ORDER BY total_city_revenue DESC;
+```
 
-Answer: San Francisco, USA has the highest level of transaction revenues at $1564.
+Answer: Other than the aggregated non-descript cities of the United states ($6092.56), San Francisco, USA has the highest level of transaction revenues at $1564.
 
 
 
 
 **Question 2: What is the average number of products ordered from visitors in each city and country?**
 
-
-SQL Queries: WITH newtable AS (
+```
+WITH newtable AS (
 SELECT country, CASE WHEN city = 'not available in demo dataset' THEN country
 																ELSE city 
 																END as 
@@ -33,7 +48,7 @@ SELECT country, city, CAST (AVG(total_ordered) as real)
 FROM newtable 
 GROUP BY country, city 
 ORDER BY avg DESC;
-
+``` 
 
 
 Answer: The avg number of products ordered from the highest ordering countries, cities are Riyadh, Saudi Arabia and Brno, Czechia at 319. 
@@ -46,10 +61,21 @@ Answer: The avg number of products ordered from the highest ordering countries, 
 
 
 SQL Queries:
-
-
-
-Answer:
+```
+SELECT country, v2_product_category, COUNT(distinct(v2_product_category)) as product_category_count
+FROM all_sessions
+WHERE v2_product_category != 'not set' and country != '(not set)'
+GROUP BY country, v2_product_category
+ORDER BY 1,2 DESC;
+```
+```
+SELECT city, v2_product_category, COUNT(distinct(v2_product_category)) as product_category_count
+FROM all_sessions
+WHERE v2_product_category != 'not set' and city != '(not set)'
+GROUP BY city, v2_product_category
+ORDER BY 1,2 DESC;
+```
+Answer: It seems that across most cities and countries, the most popular category of products is apparel.
 
 
 
@@ -60,9 +86,22 @@ Answer:
 
 SQL Queries:
 
+```
+SELECT COUNT(v2_product_name), v2_product_name, country 
+FROM all_sessions
+WHERE transactions is not null
+GROUP BY 2,3
+ORDER BY count DESC;
+```
+```
+SELECT COUNT(v2_product_name), v2_product_name, city
+FROM all_sessions
+WHERE transactions is not null and city != 'not available in demo dataset' and city != '(not set)'
+GROUP BY 2,3
+ORDER BY count DESC;
+```
 
-
-Answer:
+Answer: Similarly to question #3, a pattern emerges in that the Nest security camera is the most sold product
 
 
 
@@ -72,10 +111,26 @@ Answer:
 
 SQL Queries:
 
+-- As countries
+```
+SELECT country, SUM(total_transaction_revenue) as total_country_revenue
+FROM all_sessions
+WHERE total_transaction_revenue IS NOT null 
+GROUP BY country
+ORDER BY total_country_revenue DESC;
+```
+-- As cities
 
+```
+SELECT city, SUM(total_transaction_revenue) as total_city_revenue
+FROM all_sessions
+WHERE total_transaction_revenue IS NOT null AND city != 'not available in demo dataset'
+GROUP BY city
+ORDER BY total_city_revenue DESC;
+```
 
 Answer:
-
+Using the same queries in question #1, we can see that the country responsible for generating the most revenue is the USA, and the single city would be San Francisco.
 
 
 
