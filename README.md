@@ -15,6 +15,12 @@ My personal project goals are to be able to better understand interacting with d
 ## Results
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
 
+- Major conceentration of business done is within United States
+- Top sellers are apparel or Google Nest based
+- Referral program has been successful in converting site visitors into paying customers
+
+Refer to starting_with_questions and starting_with_data markdowns for greater detail
+
 ## Challenges 
 One major challenge that was consistent throughout the entire project was that of technical difficulties. During the process of completing the project my computer and pgadmin consistently crashed to the point where I had to change computers and start all over from scratch. 
 
